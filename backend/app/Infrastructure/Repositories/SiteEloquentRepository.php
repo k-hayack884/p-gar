@@ -9,6 +9,7 @@ use App\Infrastructure\Repositories\Concerns\ScopesByOwnUser;
 
 final class SiteEloquentRepository implements SiteRepositoryInterface
 {
+    /** @use ScopesByOwnUser<Site> */
     use ScopesByOwnUser;
 
     public function existsInScope(UserId $userId, int $siteId): bool

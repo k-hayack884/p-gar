@@ -4,7 +4,11 @@ namespace App\Infrastructure\Repositories\Concerns;
 
 use App\Domain\ValueObjects\UserId;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @template TModel of Model
+ */
 trait ScopesByParentUser
 {
     /**
@@ -12,16 +16,15 @@ trait ScopesByParentUser
      */
     abstract protected function parentUserScope(): array;
 
-    /** @template TModel of \Illuminate\Database\Eloquent\Model */
     /** @param Builder<TModel> $query @return Builder<TModel> */
     protected function scopeByParentUser(Builder $query, UserId $userId): Builder
     {
         ['parentTable' => $parentTable, 'foreignKey' => $foreignKey] = $this->parentUserScope();
         $childTable = $query->getModel()->getTable();
 
-        return $query
-            ->select("{$childTable}.*")
-            ->join($parentTable, "{$parentTable}.id", '=', "{$childTable}.{$foreignKey}")
-            ->where("{$parentTable}.user_id", $userId->value);
+        $query->select("{$childTable}.*");
+        $query->join($parentTable, "{$parentTable}.id", '=', "{$childTable}.{$foreignKey}");
+
+        return $query->where("{$parentTable}.user_id", $userId->value);
     }
 }

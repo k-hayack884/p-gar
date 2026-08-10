@@ -8,6 +8,7 @@ use App\Infrastructure\Repositories\Concerns\ScopesByParentUser;
 
 final class ChemicalApplicationEloquentRepository
 {
+    /** @use ScopesByParentUser<ChemicalApplication> */
     use ScopesByParentUser;
 
     public function existsInScope(UserId $userId, int $chemicalApplicationId): bool

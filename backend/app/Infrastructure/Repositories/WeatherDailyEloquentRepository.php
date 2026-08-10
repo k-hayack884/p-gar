@@ -8,6 +8,7 @@ use App\Infrastructure\Repositories\Concerns\ScopesByParentUser;
 
 final class WeatherDailyEloquentRepository
 {
+    /** @use ScopesByParentUser<WeatherDaily> */
     use ScopesByParentUser;
 
     /**

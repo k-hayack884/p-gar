@@ -9,6 +9,7 @@ use App\Infrastructure\Repositories\Concerns\ScopesByOwnUser;
 
 final class PlantEloquentRepository implements PlantRepositoryInterface
 {
+    /** @use ScopesByOwnUser<Plant> */
     use ScopesByOwnUser;
 
     public function existsInScope(UserId $userId, int $plantId): bool

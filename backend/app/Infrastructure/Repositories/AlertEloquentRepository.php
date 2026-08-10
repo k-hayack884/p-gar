@@ -8,6 +8,7 @@ use App\Infrastructure\Repositories\Concerns\ScopesByParentUser;
 
 final class AlertEloquentRepository
 {
+    /** @use ScopesByParentUser<Alert> */
     use ScopesByParentUser;
 
     public function existsInScope(UserId $userId, int $alertId): bool

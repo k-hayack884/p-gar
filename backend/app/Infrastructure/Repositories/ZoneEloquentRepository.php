@@ -9,6 +9,7 @@ use App\Infrastructure\Repositories\Concerns\ScopesByOwnUser;
 
 final class ZoneEloquentRepository implements ZoneRepositoryInterface
 {
+    /** @use ScopesByOwnUser<Zone> */
     use ScopesByOwnUser;
 
     public function existsInScope(UserId $userId, int $zoneId): bool

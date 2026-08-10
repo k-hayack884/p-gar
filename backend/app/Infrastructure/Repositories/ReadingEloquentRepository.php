@@ -8,6 +8,7 @@ use App\Infrastructure\Repositories\Concerns\ScopesByParentUser;
 
 final class ReadingEloquentRepository
 {
+    /** @use ScopesByParentUser<Reading> */
     use ScopesByParentUser;
 
     public function existsInScope(UserId $userId, int $readingId): bool

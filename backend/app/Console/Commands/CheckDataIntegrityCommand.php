@@ -49,7 +49,7 @@ final class CheckDataIntegrityCommand extends Command
         DB::table($table)
             ->select(['id', 'user_id', $typeColumn, $idColumn])
             ->orderBy('id')
-            ->each(function (object $record) use ($allowedTypes, $morphMap, $table, $typeColumn, $idColumn): void {
+            ->each(function (object $record) use ($allowedTypes, $morphMap, $table, $columnPrefix, $typeColumn, $idColumn): void {
                 $type = $record->{$typeColumn};
                 $targetId = (int) $record->{$idColumn};
 

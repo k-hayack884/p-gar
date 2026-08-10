@@ -9,6 +9,7 @@ use App\Infrastructure\Repositories\Concerns\ScopesByOwnUser;
 
 final class WorkLogEloquentRepository implements WorkLogRepositoryInterface
 {
+    /** @use ScopesByOwnUser<WorkLog> */
     use ScopesByOwnUser;
 
     public function existsInScope(UserId $userId, int $workLogId): bool
