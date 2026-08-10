@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       mysql:
-        image: mysql:8.0
+        image: mysql:8.4.11
         env:
           MYSQL_DATABASE: p_gar_test
           MYSQL_ROOT_PASSWORD: root
@@ -61,7 +61,7 @@ jobs:
           php artisan key:generate --ansi
 
       - name: Run PHPUnit
-        run: vendor/bin/phpunit tests
+        run: vendor/bin/phpunit
 
   vitest:
     name: Vitest
@@ -85,6 +85,9 @@ jobs:
 
       - name: Run Vitest
         run: npm test
+
+      - name: Build frontend
+        run: npm run build
 
   pint:
     name: Laravel Pint
@@ -119,15 +122,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up PHP and PHPStan
+      - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
           coverage: none
-          tools: composer:v2, phpstan
+          tools: composer:v2
 
       - name: Install Composer dependencies
         run: composer install --no-interaction --no-progress --prefer-dist
 
       - name: Run PHPStan
-        run: phpstan analyse app --level=5 --no-progress --memory-limit=1G
+        run: vendor/bin/phpstan analyse app --level=5 --no-progress --memory-limit=1G
