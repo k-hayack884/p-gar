@@ -17,7 +17,7 @@ async function submit(): Promise<void> {
   try {
     await auth.fetchCsrfCookie()
     await auth.login(email.value, password.value)
-    await router.push('/dashboard')
+    await router.push('/')
   } catch (caughtError) {
     if (axios.isAxiosError(caughtError)) {
       if (caughtError.response?.status === 422) {
