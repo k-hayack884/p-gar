@@ -11,6 +11,12 @@ class AuthApiTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_csrf_cookie_endpoint_returns_204(): void
+    {
+        // Sanctum SPA clients call this endpoint before sending state-changing requests.
+        $this->get('/sanctum/csrf-cookie')->assertNoContent();
+    }
+
     public function test_user_can_login_and_fetch_the_authenticated_user(): void
     {
         $user = UserFactory::new()->create([
