@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Domain\Repositories\Auth\AuthRepositoryInterface;
 use App\Domain\Repositories\PlantRepositoryInterface;
 use App\Domain\Repositories\SiteRepositoryInterface;
 use App\Domain\Repositories\WorkLogRepositoryInterface;
@@ -10,6 +11,7 @@ use App\Infrastructure\Models\Plant;
 use App\Infrastructure\Models\Site;
 use App\Infrastructure\Models\WorkLog;
 use App\Infrastructure\Models\Zone;
+use App\Infrastructure\Repositories\Auth\EloquentAuthRepository;
 use App\Infrastructure\Repositories\PlantEloquentRepository;
 use App\Infrastructure\Repositories\SiteEloquentRepository;
 use App\Infrastructure\Repositories\WorkLogEloquentRepository;
@@ -24,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->bind(AuthRepositoryInterface::class, EloquentAuthRepository::class);
         $this->app->bind(SiteRepositoryInterface::class, SiteEloquentRepository::class);
         $this->app->bind(ZoneRepositoryInterface::class, ZoneEloquentRepository::class);
         $this->app->bind(PlantRepositoryInterface::class, PlantEloquentRepository::class);
