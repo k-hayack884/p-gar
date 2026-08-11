@@ -21,6 +21,7 @@
         </include>
     </source>
     <php>
+        <!-- Composeが供給する$_SERVER値を意図的に上書きする。PHPUnitのserver要素はforceの有無にかかわらず無条件代入される -->
         <server name="APP_ENV" value="testing" force="true"/>
         <server name="DB_CONNECTION" value="mysql"/>
         <server name="DB_DATABASE" value="p_gar_test" force="true"/>
